@@ -113,6 +113,12 @@ img {
   height: 100%;
 }
 
+.obstacle {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 .player {
   position: absolute;
   top: 0;
