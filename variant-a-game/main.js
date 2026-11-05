@@ -1,3 +1,4 @@
+import { createGame } from "./components/Game.js";
 import { createStartScreen } from "./components/StartScreen.js";
 import { fitStage } from "./utils/fitStage.js";
 import { waitForImages } from "./utils/waitForImages.js";
@@ -11,10 +12,12 @@ const init = async () => {
   await waitForImages(ad);
 
   const startScreen = createStartScreen(ad);
+  const game = createGame(ad);
   ad.classList.add("is-ready");
 
   await startScreen.waitForTap();
   console.log("Gut Run: start", { clickTag });
+  game.start();
 };
 
 init();
