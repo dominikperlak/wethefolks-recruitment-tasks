@@ -164,6 +164,15 @@ img {
   position: absolute;
   inset: 0;
   visibility: hidden;
+}
+
+.endcard::before {
+  content: "";
+  position: absolute;
+  top: var(--logo-bar-height);
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
   background: var(--navy);
 }
 

@@ -1,10 +1,7 @@
 import { gsap } from "gsap";
+import { prefersReducedMotion } from "../utils/prefersReducedMotion.js";
 
-export const createStartScreen = (ad) => {
-  const headline = ad.querySelector(".headline");
-  const player = ad.querySelector(".player");
-  const gesture = ad.querySelector(".gesture");
-
+const createIntro = (headline, player, gesture) => {
   const tapHint = gsap.to(gesture, {
     scale: 0.94,
     transformOrigin: "40% 25%",
@@ -15,7 +12,7 @@ export const createStartScreen = (ad) => {
     paused: true,
   });
 
-  const intro = gsap
+  const timeline = gsap
     .timeline({ onComplete: () => tapHint.play() })
     .from(headline, {
       autoAlpha: 0,
@@ -27,14 +24,33 @@ export const createStartScreen = (ad) => {
     .from(player, { scale: 0, duration: 0.6, ease: "back.out(2)", clearProps: "all" }, "-=0.25")
     .from(gesture, { autoAlpha: 0, y: 16, duration: 0.5, ease: "power2.out" }, "-=0.2");
 
+  const finish = () => {
+    timeline.progress(1);
+    tapHint.kill();
+  };
+
+  return { finish };
+};
+
+export const createStartScreen = (ad) => {
+  const headline = ad.querySelector(".headline");
+  const player = ad.querySelector(".player");
+  const gesture = ad.querySelector(".gesture");
+  const reduceMotion = prefersReducedMotion();
+  const intro = reduceMotion ? null : createIntro(headline, player, gesture);
+
   const waitForTap = () =>
     new Promise((resolve) => {
       ad.addEventListener(
         "pointerdown",
         () => {
-          intro.progress(1);
-          tapHint.kill();
-          gsap.to(gesture, { autoAlpha: 0, scale: 0.8, duration: 0.25, ease: "power1.in" });
+          intro?.finish();
+          gsap.to(gesture, {
+            autoAlpha: 0,
+            scale: reduceMotion ? 1 : 0.8,
+            duration: reduceMotion ? 0 : 0.25,
+            ease: "power1.in",
+          });
           resolve();
         },
         { once: true },
