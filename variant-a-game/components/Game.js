@@ -28,6 +28,7 @@ export const createGame = (ad, { onEnd }) => {
   let scroll = START_SCROLL;
   let elapsed = 0;
   let isReady = true;
+  let isRunning = false;
 
   const isOutOfPlayfield = () => {
     const top = player.getTop();
@@ -61,10 +62,11 @@ export const createGame = (ad, { onEnd }) => {
     player.jump();
   };
 
-  const end = (result) => {
+  const end = (result, reason) => {
+    isRunning = false;
     loop.stop();
     ad.removeEventListener("pointerdown", onTap);
-    onEnd(result);
+    onEnd(result, reason);
   };
 
   const update = (delta) => {
@@ -74,7 +76,8 @@ export const createGame = (ad, { onEnd }) => {
     if (isReady) player.hover(elapsed);
     else player.update(delta);
     render();
-    if (isOutOfPlayfield() || hitsObstacle()) end("fail");
+    if (hitsObstacle()) end("fail", "hit");
+    else if (isOutOfPlayfield()) end("fail", "out");
     else if (scroll === END_SCROLL) end("win");
   };
 
@@ -85,7 +88,16 @@ export const createGame = (ad, { onEnd }) => {
       obstacle.alphaMask ??= createAlphaMask(obstacle.element, obstacle.width, obstacle.height);
     });
     ad.addEventListener("pointerdown", onTap);
+    isRunning = true;
     loop.start();
+  };
+
+  const pause = () => {
+    if (isRunning) loop.stop();
+  };
+
+  const resume = () => {
+    if (isRunning) loop.start();
   };
 
   const restart = () => {
@@ -97,5 +109,5 @@ export const createGame = (ad, { onEnd }) => {
     start();
   };
 
-  return { start, restart };
+  return { start, restart, pause, resume };
 };
