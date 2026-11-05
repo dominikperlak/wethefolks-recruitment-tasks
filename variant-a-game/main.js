@@ -9,10 +9,10 @@ const init = async () => {
   const ad = document.getElementById("ad");
 
   fitStage(ad);
+  const game = createGame(ad);
   await waitForImages(ad);
 
   const startScreen = createStartScreen(ad);
-  const game = createGame(ad);
   ad.classList.add("is-ready");
 
   await startScreen.waitForTap();
