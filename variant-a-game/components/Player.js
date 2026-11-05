@@ -10,6 +10,9 @@ const MIN_TILT = -20;
 const MAX_TILT = 30;
 const HOVER_AMPLITUDE = 4;
 const HOVER_SPEED = 6;
+const HITBOX_X = 20.75;
+const HITBOX_Y = 27;
+const HITBOX_RADIUS = 14;
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -38,5 +41,7 @@ export const createPlayer = (element) => {
 
   const getTop = () => y;
 
-  return { jump, hover, update, render, getTop, width: WIDTH, height: HEIGHT };
+  const getHitbox = () => ({ x: X + HITBOX_X, y: y + HITBOX_Y, radius: HITBOX_RADIUS });
+
+  return { jump, hover, update, render, getTop, getHitbox, width: WIDTH, height: HEIGHT };
 };
