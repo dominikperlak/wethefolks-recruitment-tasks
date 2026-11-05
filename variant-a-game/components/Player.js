@@ -20,6 +20,11 @@ export const createPlayer = (element) => {
   let y = START_Y;
   let velocity = 0;
 
+  const reset = () => {
+    y = START_Y;
+    velocity = 0;
+  };
+
   const jump = () => {
     velocity = JUMP_VELOCITY;
   };
@@ -43,5 +48,15 @@ export const createPlayer = (element) => {
 
   const getHitbox = () => ({ x: X + HITBOX_X, y: y + HITBOX_Y, radius: HITBOX_RADIUS });
 
-  return { jump, hover, update, render, getTop, getHitbox, width: WIDTH, height: HEIGHT };
+  return {
+    reset,
+    jump,
+    hover,
+    update,
+    render,
+    getTop,
+    getHitbox,
+    width: WIDTH,
+    height: HEIGHT,
+  };
 };

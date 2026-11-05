@@ -159,3 +159,51 @@ img {
   outline-color: #f00;
   background: rgb(255 0 0 / 30%);
 }
+
+.endcard {
+  position: absolute;
+  inset: 0;
+  visibility: hidden;
+  background: var(--navy);
+}
+
+.endcard-canvas {
+  position: absolute;
+  top: calc((var(--stage-height, var(--design-height)) - var(--design-height)) / 2);
+  left: 0;
+  width: var(--design-width);
+  height: var(--design-height);
+}
+
+.button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+.button img {
+  width: 100%;
+  height: 100%;
+}
+
+.fail-cta {
+  width: 186px;
+  height: 38.5px;
+  transform: translate(38px, 482.5px);
+}
+
+.replay {
+  width: 185.5px;
+  height: 40.5px;
+  transform: translate(38.5px, 538.5px);
+}
+
+.win-cta {
+  width: 214px;
+  height: 45.5px;
+  transform: translate(28px, 560px);
+}
