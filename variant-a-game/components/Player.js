@@ -8,6 +8,8 @@ const MAX_FALL_VELOCITY = 520;
 const TILT_PER_VELOCITY = 0.06;
 const MIN_TILT = -20;
 const MAX_TILT = 30;
+const HOVER_AMPLITUDE = 4;
+const HOVER_SPEED = 6;
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -17,6 +19,11 @@ export const createPlayer = (element) => {
 
   const jump = () => {
     velocity = JUMP_VELOCITY;
+  };
+
+  const hover = (time) => {
+    velocity = 0;
+    y = START_Y + Math.sin(time * HOVER_SPEED) * HOVER_AMPLITUDE;
   };
 
   const update = (delta) => {
@@ -29,7 +36,7 @@ export const createPlayer = (element) => {
     element.style.transform = `translate(${X}px, ${y}px) rotate(${tilt}deg)`;
   };
 
-  const getCenterY = () => y + HEIGHT / 2;
+  const getTop = () => y;
 
-  return { jump, update, render, getCenterY, width: WIDTH, height: HEIGHT };
+  return { jump, hover, update, render, getTop, width: WIDTH, height: HEIGHT };
 };
