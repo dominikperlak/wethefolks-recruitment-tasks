@@ -19,7 +19,7 @@ const PLAYFIELD_BOTTOM = 573.5;
 
 const easeOutQuad = (progress) => 1 - (1 - progress) ** 2;
 
-export const createGame = (ad) => {
+export const createGame = (ad, { onEnd }) => {
   const track = ad.querySelector(".track");
   const player = createPlayer(ad.querySelector(".player"));
   const obstacles = createObstacles(track, OBSTACLES);
@@ -64,7 +64,7 @@ export const createGame = (ad) => {
   const end = (result) => {
     loop.stop();
     ad.removeEventListener("pointerdown", onTap);
-    console.log(`Gut Run: ${result}`);
+    onEnd(result);
   };
 
   const update = (delta) => {
@@ -82,11 +82,20 @@ export const createGame = (ad) => {
 
   const start = () => {
     obstacles.forEach((obstacle) => {
-      obstacle.alphaMask = createAlphaMask(obstacle.element, obstacle.width, obstacle.height);
+      obstacle.alphaMask ??= createAlphaMask(obstacle.element, obstacle.width, obstacle.height);
     });
     ad.addEventListener("pointerdown", onTap);
     loop.start();
   };
 
-  return { start };
+  const restart = () => {
+    scroll = START_SCROLL;
+    elapsed = 0;
+    isReady = true;
+    player.reset();
+    render();
+    start();
+  };
+
+  return { start, restart };
 };
