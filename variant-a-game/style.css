@@ -126,6 +126,7 @@ img {
   width: 42px;
   height: 41px;
   transform: translate(55.5px, 258.5px);
+  transform-origin: 20.75px 27px;
 }
 
 .gesture {
@@ -139,4 +140,22 @@ img {
 
 .headline {
   top: calc((var(--stage-height, var(--design-height)) - var(--design-height)) / 2);
+}
+
+.debug-outline {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  outline: 1px dashed #0f0;
+}
+
+.debug-player {
+  border-radius: 50%;
+  outline-style: solid;
+}
+
+.debug-player.is-hit {
+  outline-color: #f00;
+  background: rgb(255 0 0 / 30%);
 }

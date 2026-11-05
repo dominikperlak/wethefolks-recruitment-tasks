@@ -1,5 +1,7 @@
 import { OBSTACLES } from "../level.js";
+import { circleHitsMask, createAlphaMask } from "../utils/collision.js";
 import { createLoop } from "../utils/createLoop.js";
+import { createDebugOverlay, isDebugMode } from "./DebugOverlay.js";
 import { createObstacles } from "./Obstacles.js";
 import { createPlayer } from "./Player.js";
 
@@ -20,7 +22,9 @@ const easeOutQuad = (progress) => 1 - (1 - progress) ** 2;
 export const createGame = (ad) => {
   const track = ad.querySelector(".track");
   const player = createPlayer(ad.querySelector(".player"));
-  createObstacles(track, OBSTACLES);
+  const obstacles = createObstacles(track, OBSTACLES);
+  const debugOverlay = isDebugMode() ? createDebugOverlay(ad, obstacles) : null;
+  debugOverlay?.update(player.getHitbox(), false);
   let scroll = START_SCROLL;
   let elapsed = 0;
   let isReady = true;
@@ -28,6 +32,16 @@ export const createGame = (ad) => {
   const isOutOfPlayfield = () => {
     const top = player.getTop();
     return top + player.height < PLAYFIELD_TOP || top > PLAYFIELD_BOTTOM;
+  };
+
+  const getPlayerHitbox = () => {
+    const hitbox = player.getHitbox();
+    return { ...hitbox, x: hitbox.x + scroll };
+  };
+
+  const hitsObstacle = () => {
+    const hitbox = getPlayerHitbox();
+    return obstacles.some((obstacle) => circleHitsMask(hitbox, obstacle));
   };
 
   const getScrollSpeed = () => {
@@ -39,6 +53,7 @@ export const createGame = (ad) => {
   const render = () => {
     track.style.transform = `translateX(${-scroll}px)`;
     player.render();
+    debugOverlay?.update(player.getHitbox(), hitsObstacle());
   };
 
   const onTap = () => {
@@ -59,13 +74,16 @@ export const createGame = (ad) => {
     if (isReady) player.hover(elapsed);
     else player.update(delta);
     render();
-    if (isOutOfPlayfield()) end("fail");
+    if (isOutOfPlayfield() || hitsObstacle()) end("fail");
     else if (scroll === END_SCROLL) end("win");
   };
 
   const loop = createLoop(update);
 
   const start = () => {
+    obstacles.forEach((obstacle) => {
+      obstacle.alphaMask = createAlphaMask(obstacle.element, obstacle.width, obstacle.height);
+    });
     ad.addEventListener("pointerdown", onTap);
     loop.start();
   };
