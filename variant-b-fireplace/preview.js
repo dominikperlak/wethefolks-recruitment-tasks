@@ -10,5 +10,14 @@ const applyFit = () => {
   document.documentElement.style.setProperty("--scale", scale);
 };
 
+const forwardQuery = () => {
+  const { search } = window.location;
+  if (!search) return;
+  document.querySelectorAll(".part").forEach((part) => {
+    part.src = `${part.getAttribute("src")}${search}`;
+  });
+};
+
 applyFit();
+forwardQuery();
 window.addEventListener("resize", applyFit);

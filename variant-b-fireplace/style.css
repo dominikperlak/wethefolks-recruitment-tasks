@@ -90,3 +90,11 @@ img {
   width: 100%;
   height: 100%;
 }
+
+.debug-overlay {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+}
