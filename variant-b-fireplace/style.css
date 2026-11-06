@@ -53,3 +53,29 @@ img {
   max-width: none;
   transform: translateX(calc(-1 * var(--offset-x)));
 }
+
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 320px;
+  height: 975px;
+}
+
+.box {
+  clip-path: inset(744.5px 0 61px 0);
+  opacity: 0.9;
+}
+
+.copy {
+  mix-blend-mode: screen;
+}
+
+.cta {
+  position: absolute;
+  top: 837.5px;
+  left: 73.75px;
+  width: 172.5px;
+  height: 46.5px;
+  border-radius: 7px;
+}
