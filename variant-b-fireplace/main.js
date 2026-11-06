@@ -1,8 +1,8 @@
-const clickTag = window.clickTag || "https://example.com/landing";
+import { openLandingPage } from "./utils/landingPage.js";
 
 const init = () => {
   const ad = document.getElementById("ad");
-  console.log("Fireplace: init", { ad, clickTag });
+  ad.addEventListener("click", openLandingPage);
 };
 
 init();
