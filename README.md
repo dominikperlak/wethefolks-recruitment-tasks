@@ -54,4 +54,4 @@ pnpm dev
 
 ## How I used AI
 
-I worked with Claude Code, but I drove the project. I designed the setup and structure myself (Vite, ESLint, Prettier, CI, conventions, branch and PR workflow), set the plan, made the key decisions, tested every step manually in the browser and reviewed each change before committing it. Claude Code wrote most of the code under that review and helped with measuring assets and checking animations in headless Chrome.
+I worked with Claude Code, but I drove the project. I designed the setup and structure myself (Vite, ESLint, Prettier, CI, conventions, branch and PR workflow), set the plan, made the key decisions, tested every step manually in the browser and reviewed each change before committing it. Claude Code wrote most of the code under that review and helped with measuring assets and checking animations in headless Chrome. One thing I had to fix: its first audio setup used `HTMLAudioElement`, which sometimes stayed silent on mobile, so I switched it to Web Audio.
