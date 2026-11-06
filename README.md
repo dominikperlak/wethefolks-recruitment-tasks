@@ -12,6 +12,10 @@ The reasoning behind the main choices is in [DECISIONS.md](./DECISIONS.md).
 - Game: https://dominikperlak.github.io/wethefolks-recruitment-tasks/variant-a-game/
 - Fireplace: https://dominikperlak.github.io/wethefolks-recruitment-tasks/variant-b-fireplace/preview.html
 
+## Recording
+
+Short screen recordings without sound (the game itself has music and effects): [game](./media/game.mp4) and [fireplace](./media/fireplace.mp4).
+
 ## Run it locally
 
 Requires Node 20+ and pnpm.
