@@ -1,8 +1,10 @@
-const clickTag = window.clickTag || "https://example.com/landing";
+import { createDebugOverlay, isDebugMode } from "./components/DebugOverlay.js";
+import { openLandingPage } from "./utils/landingPage.js";
 
 const init = () => {
   const ad = document.getElementById("ad");
-  console.log("Fireplace: init", { ad, clickTag });
+  ad.addEventListener("click", openLandingPage);
+  if (isDebugMode()) createDebugOverlay(ad);
 };
 
 init();

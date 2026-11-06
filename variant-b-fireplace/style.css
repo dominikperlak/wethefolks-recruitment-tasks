@@ -6,9 +6,95 @@
   padding: 0;
 }
 
+:root {
+  --fireplace-width: 1680px;
+  --fireplace-height: 975px;
+}
+
 html,
 body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+img {
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#ad {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+#ad[data-part="left"] {
+  --offset-x: 0px;
+}
+
+#ad[data-part="top"] {
+  --offset-x: 324px;
+}
+
+#ad[data-part="right"] {
+  --offset-x: 1360px;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--fireplace-width);
+  height: var(--fireplace-height);
+  max-width: none;
+  transform: translateX(calc(-1 * var(--offset-x)));
+}
+
+.layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.box {
+  clip-path: inset(744.5px 0 61px 0);
+  opacity: 0.9;
+}
+
+.copy {
+  mix-blend-mode: screen;
+}
+
+.cta {
+  position: absolute;
+  top: 837.5px;
+  left: 73.75px;
+  width: 172.5px;
+  height: 46.5px;
+  padding: 0;
+  overflow: hidden;
+  border: 0;
+  border-radius: 7px;
+  background: none;
+  cursor: pointer;
+}
+
+.cta img {
+  width: 100%;
+  height: 100%;
+}
+
+.debug-overlay {
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
 }
