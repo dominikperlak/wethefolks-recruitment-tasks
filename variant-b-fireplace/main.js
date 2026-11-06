@@ -2,6 +2,7 @@ import { createDebugOverlay, isDebugMode } from "./components/DebugOverlay.js";
 import { createIntro } from "./components/Intro.js";
 import { openLandingPage } from "./utils/landingPage.js";
 import { waitForImages } from "./utils/waitForImages.js";
+import { waitForStart } from "./utils/waitForStart.js";
 
 const init = async () => {
   const ad = document.getElementById("ad");
@@ -10,6 +11,7 @@ const init = async () => {
 
   await waitForImages(ad);
   const intro = createIntro(ad);
+  await waitForStart();
   ad.style.visibility = "visible";
   intro.play();
 };
