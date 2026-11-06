@@ -7,6 +7,11 @@ Two animated rich media ads built with plain HTML, CSS, JavaScript and GSAP.
 
 The reasoning behind the main choices is in [DECISIONS.md](./DECISIONS.md).
 
+## Live
+
+- Game: https://dominikperlak.github.io/wethefolks-recruitment-tasks/variant-a-game/
+- Fireplace: https://dominikperlak.github.io/wethefolks-recruitment-tasks/variant-b-fireplace/preview.html
+
 ## Run it locally
 
 Requires Node 20+ and pnpm.
