@@ -6,9 +6,50 @@
   padding: 0;
 }
 
+:root {
+  --fireplace-width: 1680px;
+  --fireplace-height: 975px;
+}
+
 html,
 body {
   width: 100%;
   height: 100%;
   overflow: hidden;
+}
+
+img {
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+#ad {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+#ad[data-part="left"] {
+  --offset-x: 0px;
+}
+
+#ad[data-part="top"] {
+  --offset-x: 324px;
+}
+
+#ad[data-part="right"] {
+  --offset-x: 1360px;
+}
+
+.background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--fireplace-width);
+  height: var(--fireplace-height);
+  max-width: none;
+  transform: translateX(calc(-1 * var(--offset-x)));
 }

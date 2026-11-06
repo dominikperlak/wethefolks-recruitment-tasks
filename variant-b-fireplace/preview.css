@@ -1,0 +1,52 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --fireplace-width: 1680px;
+  --fireplace-height: 975px;
+  --gap: 4px;
+  --skyscraper-width: 320px;
+  --scale: 1;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #282828;
+}
+
+.fireplace {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: var(--fireplace-width);
+  height: var(--fireplace-height);
+  transform: translateX(-50%) scale(var(--scale));
+  transform-origin: top center;
+}
+
+.part {
+  position: absolute;
+  top: 0;
+  display: block;
+  border: 0;
+}
+
+.part-left {
+  left: 0;
+}
+
+.part-top {
+  left: calc(var(--skyscraper-width) + var(--gap));
+}
+
+.part-right {
+  right: 0;
+}
