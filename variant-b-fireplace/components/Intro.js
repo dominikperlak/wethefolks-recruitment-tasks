@@ -38,7 +38,7 @@ const addSkyscraper = (timeline, ad) => {
 };
 
 export const createIntro = (ad) => {
-  const timeline = gsap.timeline({ paused: true });
+  const timeline = gsap.timeline();
   addBackground(timeline, ad);
   if (ad.dataset.part === "top") addHeadline(timeline, ad);
   else addSkyscraper(timeline, ad);
