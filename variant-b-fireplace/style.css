@@ -30,6 +30,7 @@ img {
   width: 100%;
   height: 100%;
   overflow: hidden;
+  visibility: hidden;
   cursor: pointer;
 }
 
@@ -53,6 +54,7 @@ img {
   height: var(--fireplace-height);
   max-width: none;
   transform: translateX(calc(-1 * var(--offset-x)));
+  transform-origin: 840px 487.5px;
 }
 
 .layer {
@@ -61,6 +63,23 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.headline {
+  position: absolute;
+  inset: 0;
+}
+
+.line-1 {
+  clip-path: inset(0 0 165px 0);
+}
+
+.line-2 {
+  clip-path: inset(85px 0 97.5px 0);
+}
+
+.line-3 {
+  clip-path: inset(152.5px 0 0 0);
 }
 
 .box {
